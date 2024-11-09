@@ -108,7 +108,7 @@ class AnalyzerRunlocal():
         return datetime.utcnow().strftime("%Y%m%dZ%H%M%S")
 
     def shell_command(self, command_line, timeout_seconds=300, encoding='utf8'):
-        process = subprocess.Popen(command_line, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(command_line, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         process.wait(timeout_seconds)
         stdout, stderr = process.communicate()
         if encoding is None or len(encoding) == 0:
