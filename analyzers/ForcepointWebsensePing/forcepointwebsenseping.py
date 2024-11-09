@@ -35,7 +35,7 @@ def summary(self, raw):
         if self.data_type in ("url", "ip", "domain","fqdn"):
             data = self.get_param('data', None, 'Data is missing')
             command = "export LD_LIBRARY_PATH={} && {}/WebsensePing -m 25 -url {} -s {} -t {}".format(self.path, self.path, data, self.hostname, self.timeout)
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output = [line.decode('utf8') for line in process.stdout]
             report = {k.strip():v.strip() for k,v in [x.split("=") for x in output if x.find("=") != -1]}
             self.report(report)
